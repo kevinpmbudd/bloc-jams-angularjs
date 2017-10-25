@@ -29,6 +29,8 @@
 
         scope.fillStyle = () => ({ width: percentString() });
 
+        scope.thumbStyle = () => ({ left: percentString() });
+
         scope.onClickSeekBar = event => {
           let percent = calculatePercent(seekBar, event);
           scope.value = percent * scope.max;
