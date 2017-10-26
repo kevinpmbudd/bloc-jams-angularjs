@@ -13,12 +13,22 @@
       templateUrl: '/templates/directives/seek_bar.html',
       replace: true,
       restrict: 'E',
-      scope: { },
+      scope: {
+        onChange: '&'
+      },
       link: function(scope, element, attributes) {
         scope.value = 0;
         scope.max = 100;
 
         let seekBar = $(element);
+
+        attributes.$observe('value', (newValue) => {
+          scope.value = newValue;
+        });
+
+        attributes.$observe('max', (newValue) => {
+          scope.max = newValue;
+        });
 
         let percentString = () => {
           let value = scope.value;
@@ -34,6 +44,7 @@
         scope.onClickSeekBar = event => {
           let percent = calculatePercent(seekBar, event);
           scope.value = percent * scope.max;
+          notifyOnChange(scope.value);
         };
 
         scope.trackThumb = () => {
@@ -41,6 +52,7 @@
             let percent = calculatePercent(seekBar, event);
             scope.$apply( () => {
               scope.value = percent * scope.max;
+              notifyOnChange(scope.value);
             });
           });
 
@@ -48,6 +60,12 @@
             $document.unbind('mousemove.thumb');
             $document.unbind('mouseup.thumb');
           });
+        };
+
+        let notifyOnChange = (newValue) => {
+          if (typeof scope.onChange === 'function') {
+            scope.onChange( {value: newValue });
+          }
         };
       }
     };
