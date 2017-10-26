@@ -85,6 +85,12 @@
     SongPlayer.currentTime = null;
 
     /**
+    * @desc Holds the default value of the volume of the currentBuzzObject
+    * @type {Number}
+    */
+    SongPlayer.volume = 80;
+
+    /**
     * @function SongPlayer.play
     * @desc Plays the currentBuzzObject
     * @param {Object} song
@@ -154,6 +160,17 @@
     SongPlayer.setCurrentTime = (time) => {
       if (currentBuzzObject) {
         currentBuzzObject.setTime(time);
+      }
+    };
+
+    /**
+    * @function setVolume
+    * @desc Update the volume of currentBuzzObject on change
+    * @param {Number} volume
+    */
+    SongPlayer.setVolume = (volume) => {
+      if (currentBuzzObject) {
+        currentBuzzObject.setVolume(volume);
       }
     };
 
