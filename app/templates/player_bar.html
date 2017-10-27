@@ -32,7 +32,8 @@
       </div>
     </div>
     <div class="control-group volume">
-      <span class="icon ion-volume-high"></span>
+      <span class="icon ion-volume-mute" ng-click="playerBar.songPlayer.toggleMute()" ng-show="playerBar.songPlayer.isMuted"></span>
+      <span class="icon ion-volume-high" ng-click="playerBar.songPlayer.toggleMute()" ng-show="!playerBar.songPlayer.isMuted"></span>
       <seek-bar value="{{ playerBar.songPlayer.volume }}"
                 max=100
                 on-change="playerBar.songPlayer.setVolume(value)">

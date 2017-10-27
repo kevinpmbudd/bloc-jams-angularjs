@@ -39,6 +39,14 @@
         });
       });
 
+      currentBuzzObject.bind('ended', () => {
+        SongPlayer.next();
+      });
+
+      if (SongPlayer.isMuted) {
+        currentBuzzObject.mute();
+      }
+
       SongPlayer.currentSong = song;
     };
 
@@ -89,6 +97,13 @@
     * @type {Number}
     */
     SongPlayer.volume = 80;
+
+    /**
+    * @desc Boolean for whether or not currentBuzzObject volume is muted
+    * @type {Boolean}
+    */
+    SongPlayer.isMuted = false;
+
 
     /**
     * @function SongPlayer.play
@@ -171,6 +186,17 @@
     SongPlayer.setVolume = (volume) => {
       if (currentBuzzObject) {
         currentBuzzObject.setVolume(volume);
+      }
+    };
+
+    /**
+    * @function toggleMute
+    * @desc Turn volume off or on (wrapper around buzz.toggleMute function)
+    */
+    SongPlayer.toggleMute = () => {
+      if (currentBuzzObject) {
+        currentBuzzObject.toggleMute();
+        SongPlayer.isMuted = !SongPlayer.isMuted;
       }
     };
 
