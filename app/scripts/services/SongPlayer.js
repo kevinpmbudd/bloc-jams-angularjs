@@ -200,6 +200,10 @@
       }
     };
 
+    SongPlayer.setRating = (rating, $index) => {
+      Fixtures.setRating(rating, $index);
+    };
+
     return SongPlayer;
   }
 
